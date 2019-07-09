@@ -1,6 +1,7 @@
 package it.polito.tdp.extflightdelays.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.jgrapht.Graph;
@@ -43,6 +44,7 @@ public class Model {
 			Raggiungibili raggiungibile= new Raggiungibili(grafo.getEdgeTarget(de), (int)(grafo.getEdgeWeight(de)));
 			raggiungibili.add(raggiungibile);
 		}
+		Collections.sort(raggiungibili);
 		return raggiungibili;
 	}
 
