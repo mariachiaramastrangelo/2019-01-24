@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.extflightdelays.model.Model;
+import it.polito.tdp.extflightdelays.model.Raggiungibili;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -47,7 +48,10 @@ public class ExtFlightDelaysController {
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
-
+    	txtResult.clear();
+    	model.creaGrafo();
+    	txtResult.appendText(model.grafoCreato()+"\n");
+    	
     }
 
     @FXML
@@ -57,11 +61,15 @@ public class ExtFlightDelaysController {
 
     @FXML
     void doVisualizzaVelivoli(ActionEvent event) {
-
+    	txtResult.appendText("Stati raggiungibili da "+ this.cmbBoxStati.getValue()+":\n");
+    	for(Raggiungibili r: model.statiRaggiongibili(this.cmbBoxStati.getValue())) {
+    		txtResult.appendText(r.toString()+"\n");
+    	}
     }
     
     public void setModel(Model model) {
 		this.model = model;	
+		this.cmbBoxStati.getItems().addAll(model.listAllStates());
 	}
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
