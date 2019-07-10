@@ -3,6 +3,7 @@ package it.polito.tdp.extflightdelays.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
@@ -15,6 +16,7 @@ public class Model {
 	
 	ExtFlightDelaysDAO dao;
 	DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> grafo;
+	Simulatore simulatore;
 	
 	public Model() {
 		dao= new ExtFlightDelaysDAO();
@@ -46,6 +48,13 @@ public class Model {
 		}
 		Collections.sort(raggiungibili);
 		return raggiungibili;
+	}
+	
+	public Map<String, Integer> getTuristiPaese(int T,int G, String paesePartenza){
+		simulatore= new Simulatore();
+		simulatore.init(T, G,paesePartenza, grafo);
+		simulatore.run();
+		return simulatore.turistiPerPaese();
 	}
 
 }

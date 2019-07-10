@@ -5,6 +5,7 @@
 package it.polito.tdp.extflightdelays;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.extflightdelays.model.Model;
@@ -56,7 +57,10 @@ public class ExtFlightDelaysController {
 
     @FXML
     void doSimula(ActionEvent event) {
-
+    	Map<String, Integer> result = model.getTuristiPaese(Integer.parseInt(this.txtT.getText()), Integer.parseInt(this.txtG.getText()), this.cmbBoxStati.getValue());
+    	for(String s: result.keySet()) {
+    		txtResult.appendText("\n" +s+" "+result.get(s));
+    	}
     }
 
     @FXML
