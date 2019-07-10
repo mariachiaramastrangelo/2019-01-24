@@ -7,6 +7,8 @@ public class TestModel {
 		Model model = new Model();
 		model.creaGrafo();
 		System.out.println(model.grafoCreato());
+		 
+		model.getTuristiPaese(100, 3, "WV");
 	}
 
 }

@@ -43,16 +43,22 @@ public class Simulatore {
 			double totale= calcolaPesiTotaliUscenti(uscenti);
 			for(DefaultWeightedEdge dwe: uscenti) {
 				//condizione per finire di aggiungere eventi
-				if(e.getGiorno()<=G) {
-					double peso=  grafo.getEdgeWeight(dwe);
+				if(e.getGiorno()<=G && e.getNumeroTuristi()>1) {
+					double peso=  (int)grafo.getEdgeWeight(dwe);
 					double percentuale= peso/totale;
-					int turistispostati= (int) (Math.round(percentuale)*e.getNumeroTuristi());
+					int turistispostati= (int) (percentuale*e.getNumeroTuristi());
+					System.out.println(peso+" "+totale+" "+percentuale+" "+turistispostati);
 					queue.add(new Evento(e.getGiorno()+1, grafo.getEdgeTarget(dwe), turistispostati));
+					turistiPaese.put(e.getPaese(), e.getNumeroTuristi());
 				}
+				if (e.getGiorno()==G) {
+					
+					turistiPaese.put(e.getPaese(), e.getNumeroTuristi());
+				}
+				
 			}
-			if (e.getGiorno()==G) {
-				turistiPaese.put(e.getPaese(), e.getNumeroTuristi());
-			}	
+				
+				
 				
 		}
 		
